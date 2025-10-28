@@ -38,6 +38,7 @@ bundle = 12345678901234
 7. ✅ You’re ready to roll out updates live.
 
 8. 🧰 Folder Structure Inside NightBundle
+
 NightBundle
 ├─ _Remove/                      # Paths here = what gets deleted
 ├─ Workspace/

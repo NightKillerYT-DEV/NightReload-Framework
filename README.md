@@ -1,49 +1,43 @@
-🌙 NightReload Framework
+# 🌙 NightReload Framework
 
-A hot-update system for Roblox that lets you add, replace, or remove game content in real time — without shutting down your servers.
-Easily update active servers, push new scripts, or remove old assets, all while keeping the game running smoothly.
+**NightReload** is a powerful hot-update system for Roblox that lets you **add**, **replace**, or **remove** game content in **real time** — without shutting down servers.  
+Easily push updates, new scripts, or remove old assets, all while keeping the game running smoothly.
 
-📦 What You Get
- 
-✅ A ready-to-use Model called NightBundle
+------------------------------------------------------------------------------------------------------------------------------------------
 
-🧩 A powerful update system that works with all major Roblox services
+## 📦 What You Get
 
-🔁 Real-time server updates with one simple console command
+- ✅ A ready-to-use model called **NightBundle**  
+- 🔁 A live **hot-update system** for Roblox games  
+- 🧩 Real-time updates across **all active servers**  
+- 🛡️ Protected service containers (only contents are changed, never deleted)  
+- 🧼 `_Remove` folder system to clean up unwanted assets with exact paths  
+- 🧠 Support for continuous updates without breaking data or sessions
 
-🛡️ Protected service containers (only contents are changed, never deleted)
+------------------------------------------------------------------------------------------------------------------------------------------
 
-🧼 _Remove folder system to clean up unwanted assets using path structure
+## 🪄 How It Works
 
-🧠 Support for continuous development without breaking your game
-
-🪄 How It Works
-
-Download or clone this repository.
-
-Insert the NightBundle model into your game.
-
-Publish the NightBundle model to your Roblox account or group.
-
-Open:
+1. **Download or clone** this repository.  
+2. Insert the **`NightBundle`** model into your game.  
+3. **Publish** the `NightBundle` model to **your Roblox account** or **group**.  
+4. Open:
 
 ReplicatedStorage.Packages._Index.night_nightreload@1.0.0.night.Core.Manifest
 
-
-and replace the bundle ID with your own model’s asset ID:
+5. Replace the `bundle` ID with **your own model’s asset ID**:
 
 bundle = 12345678901234
 
+6. Add the provided NightReload scripts:
 
-Add the provided NightReload scripts:
+📜 Server: Place the server script in ServerScriptService.
 
-Server: place the server script in ServerScriptService
+💻 Client: Place the local script in StarterPlayer/StarterPlayerScripts.
 
-Client: place the local script in StarterPlayer/StarterPlayerScripts
+7. ✅ You’re ready to roll out updates live.
 
-You’re ready to roll out updates live.
-
-🧰 Folder Structure Inside NightBundle
+8. 🧰 Folder Structure Inside NightBundle
 NightBundle
 ├─ _Remove/                      # Paths here = what gets deleted
 ├─ Workspace/
@@ -61,10 +55,14 @@ NightBundle
 ├─ TextChatService/
 └─ MaterialService/
 
-🧹 The _Remove Folder (Deleting Stuff)
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+## 🧹 The _Remove Folder (Deleting Stuff)
 
 Whatever you mirror in _Remove will be deleted during rollout.
-
 The path must match exactly where the item exists in the game.
 
 Example 1 — Remove a script inside nested folders:
@@ -75,22 +73,29 @@ _Remove
       └─ FolderB
          └─ ScriptToRemove
 
-
 👉 Deletes only Workspace/FolderA/FolderB/ScriptToRemove.
+
 
 Example 2 — Remove a full folder:
 
 _Remove
 └─ Workspace
-   └─ OldEvent      # empty folder
-
+   └─ OldEvent   # empty folder
 
 👉 Deletes Workspace/OldEvent entirely.
 
-🛡️ Protected containers (will never be deleted, only their contents):
-StarterPlayer, StarterPlayer/StarterPlayerScripts, StarterPlayer/StarterCharacterScripts, ServerStorage, ServerStorage/ServerScriptService, Workspace, ReplicatedStorage, StarterGui, StarterPack, Teams, Lighting, SoundService, TextChatService, MaterialService.
 
-🧭 Adding / Replacing Content
+
+🛡️ Protected containers (will never be deleted, only their contents):
+StarterPlayer, StarterPlayer/StarterPlayerScripts, StarterPlayer/StarterCharacterScripts,
+ServerStorage, ServerStorage/ServerScriptService, Workspace, ReplicatedStorage,
+StarterGui, StarterPack, Teams, Lighting, SoundService, TextChatService, MaterialService.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+## 🧭 Adding / Replacing Content
 
 All other service folders (siblings of _Remove) are used to add or replace existing content.
 
@@ -98,39 +103,51 @@ For example:
 
 Workspace/MyNewModel → adds or replaces that model in Workspace
 
-ServerStorage/ServerScriptService/MyScript → replaces or adds a script to SSS
+ServerStorage/ServerScriptService/MyScript → replaces or adds a script to ServerScriptService
 
 If something with the same name already exists, it will be replaced automatically.
 
-🧪 Checking the Current Version
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+## 🧪 Checking the Current Version
 
 In the Server Console:
 
 print(game.ReplicatedStorage.Packages._Index["night_nightreload@1.0.0"].night.Core.Flags.CurrentVersion.Value)
 
-🚀 Rolling Out Updates
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+## 🚀 Rolling Out Updates
 
 In the Server Console:
 
 local NR = require(game.ReplicatedStorage.Packages.NightReload)
 NR.Rollout({
 	bundle  = 12345678901234,  -- your bundle ID
-	version = "0.0.2",         -- bump this every time
+	version = "0.0.2",         -- bump this each rollout
 	mode    = "rollout",
 })
 
 
-📝 Important:
+
+#📝 Important:
 
 You must bump the version each time (e.g. 0.0.3, 0.0.4...).
 
-If you don’t bump it, the rollout won’t run.
+If you don’t bump, rollout won’t run.
 
-There’s a short cooldown (10 seconds by default) between rollouts.
+There’s a short cooldown (10s by default) between rollouts.
 
-🛠 Optional Rollout Trigger Script
 
-If you prefer a button or event to trigger rollouts automatically, you can use the provided rollout script in ServerScriptService:
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+## 🛠 Optional Rollout Trigger Script
+
+Place this script in ServerScriptService if you want to trigger rollouts with one event:
+
 
 local Rep = game:GetService("ReplicatedStorage")
 local NR  = require(Rep.Packages.NightReload)
@@ -158,16 +175,18 @@ end)
 print("[NightReload] Ready → trigger with: game.ReplicatedStorage.RolloutTrigger:Fire()")
 
 
+
 Then in the console:
 
 game.ReplicatedStorage.RolloutTrigger:Fire()
 
+✅ Auto-bumps the version and applies the update to all active servers.
 
-✅ This will auto-bump the version and apply the update to all active servers.
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-🧠 Tips
+## 🧠 Tips
 
-Make sure your Manifest.bundle ID is always set to the latest version of your model.
+Always keep your Manifest.bundle ID up to date.
 
 New servers get the latest bundle automatically.
 
@@ -175,9 +194,39 @@ Old servers get the update when you rollout.
 
 _Remove is optional. If you don’t need to delete anything, leave it empty.
 
-ProfileService sessions or player data won’t reset — your game keeps running smoothly.
+Player data (e.g. ProfileService) is not reset — your game keeps running smoothly.
 
-🪪 License
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+## ⚙️ Protected Containers
+
+These service containers will never be deleted, only their contents are cleared or replaced:
+
+StarterPlayer
+StarterPlayer/StarterPlayerScripts
+StarterPlayer/StarterCharacterScripts
+ServerStorage
+ServerStorage/ServerScriptService
+Workspace
+ReplicatedStorage
+StarterGui
+StarterPack
+Teams
+Lighting
+SoundService
+TextChatService
+MaterialService
+
+
+This ensures your game structure remains stable during updates.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+## 🪪 License
+
+
 NightReload Framework
 Copyright (c) 2025 NightKillerYT-DEV
 
@@ -188,9 +237,13 @@ You may not claim ownership or sell this as your own product.
 
 📜 Full license text is included in the LICENSE file of this repository.
 
-👑 Credits
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-Created & maintained by NightKillerYT-DEV
-If you use this framework in your project, please give proper credit and link back to the repository.
+## 👑 Credits
 
-⭐ Consider starring the repo if it helped you!
+Created and maintained by NightKillerYT-DEV
+If you use this framework, please give credit and link back to the repo.
+⭐ Consider starring the project if it helped you!
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+

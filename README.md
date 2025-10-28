@@ -39,25 +39,6 @@ bundle = 12345678901234
 
 8. 🧰 Folder Structure Inside NightBundle
 
-NightBundle
-├─ _Remove/                      # Paths here = what gets deleted
-├─ Workspace/
-├─ ReplicatedStorage/
-├─ StarterGui/
-├─ StarterPlayer/
-│  ├─ StarterPlayerScripts/
-│  └─ StarterCharacterScripts/
-├─ StarterPack/
-├─ ServerStorage/
-│  └─ ServerScriptService/       # Server scripts go here
-├─ Lighting/
-├─ SoundService/
-├─ Teams/
-├─ TextChatService/
-└─ MaterialService/
-
-
-
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 
